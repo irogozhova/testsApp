@@ -1,13 +1,24 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 
-// import styles from './HomePage.scss';
+import styles from './LoginPage.module.scss';
 
 class LoginPage extends PureComponent {
   render() {
     return (
-      <Fragment>
-        LoginPage
-      </Fragment>
+      <div className={styles.root}>
+        <h1>Авторизуйтесь, пожалуйста:</h1>
+        <form>
+          <label>
+            логин:
+            <input type="text" name="username" />
+          </label>
+          <label>
+            пароль:
+            <input type="password" name="password" />
+          </label>
+          <input type="submit" value="Войти" />
+        </form>
+      </div>
     );
   }
 }

@@ -1,15 +1,15 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 
 import AppRouter from '../AppRouter';
+
+import './App.css';
 
 class App extends PureComponent {
   render() {
     const { routes } = this.props;
 
     return (
-      <Fragment>
-        <AppRouter routes={routes} />
-      </Fragment>
+      <AppRouter routes={routes} />
     );
   }
 }
