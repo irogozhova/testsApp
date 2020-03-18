@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Provider } from "react-redux";
 
-import AppRouter from '../AppRouter';
-import store from '../../store';
+import AppRouter from 'components/AppRouter';
+import store from 'store';
 
 import './App.css';
 

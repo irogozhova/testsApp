@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
-import { UPDATE_FIELD } from "../../../constants";
+import { UPDATE_FIELD } from "constants/common";
 
 const mapStateToProps = state => {
   return { form: state.form };

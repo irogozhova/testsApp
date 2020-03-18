@@ -1,7 +1,7 @@
 import LoginPage from './pages/LoginPage';
 import AllTestsPage from './pages/AllTestsPage';
 
-import { pagesLink } from './constants';
+import { pagesLink } from 'constants/common';
 
 export default [
   {
