@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+import RegistrationForm from './RegistrationForm';
+
 import styles from './LoginPage.module.scss';
 
 class LoginPage extends PureComponent {
@@ -10,21 +12,11 @@ class LoginPage extends PureComponent {
       <div className={styles.root}>
         <Tabs>
           <TabList>
-            <Tab>Авторизация</Tab>
             <Tab>Регистрация</Tab>
+            <Tab>Авторизация</Tab>
           </TabList>
           <TabPanel>
-            <form>
-              <label>
-                логин:
-                <input type="text" name="username" />
-              </label>
-              <label>
-                пароль:
-                <input type="password" name="password" />
-              </label>
-              <input type="submit" value="Войти" />
-            </form>
+            <RegistrationForm />
           </TabPanel>
           <TabPanel>
             <form>
@@ -36,22 +28,8 @@ class LoginPage extends PureComponent {
                 пароль:
                 <input type="password" name="password" />
               </label>
-              <label>
-                подтвердите пароль:
-                <input type="password" name="password" />
-              </label>
-              <label>
-                Админ:
-                <input
-                  name="isAdmin"
-                  type="checkbox"
-                  checked={true}
-                  // checked={this.state.isGoing}
-                  // onChange={this.handleInputChange}
-                />
-              </label>
               <input type="submit" value="Войти" />
-            </form>
+            </form> 
           </TabPanel>
         </Tabs>
       </div>

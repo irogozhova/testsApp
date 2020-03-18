@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
+import { Provider } from "react-redux";
 
 import AppRouter from '../AppRouter';
+import store from '../../store';
 
 import './App.css';
 
@@ -9,7 +11,9 @@ class App extends PureComponent {
     const { routes } = this.props;
 
     return (
-      <AppRouter routes={routes} />
+      <Provider store={store}>
+        <AppRouter routes={routes} />
+      </Provider>
     );
   }
 }
