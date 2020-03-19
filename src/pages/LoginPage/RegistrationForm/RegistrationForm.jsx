@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
-import { UPDATE_FIELD, REGISTER } from "constants/common";
+import { onFieldChange, onSubmit } from "actions/registration";
 
 class RegistrationForm extends PureComponent {
 
   handleFormFieldChange = (event) => {
     const { target: { name, value, checked } } = event;
-    this.props.onFieldChange(name, checked || value);
+    this.props.onFieldChange({ name, value: checked || value });
   }
 
   handleSubmit = (event) => {
@@ -70,15 +70,20 @@ class RegistrationForm extends PureComponent {
   }
 }
 
-//TODO: rewrite actions with action creators and shorten this
 const mapStateToProps = state => {
   return { form: state.registration.form };
 };
 
-const mapDispatchToProps = dispatch => ({
-  onFieldChange: (key, value) =>
-    dispatch({ type: UPDATE_FIELD, key, value }),
-  onSubmit: (form) => dispatch({ type: REGISTER, form }),
-});
+// const mapDispatchToProps = dispatch => ({
+//   onFieldChange: (key, value) =>
+//     dispatch({ type: UPDATE_FIELD, key, value }),
+//   onSubmit: (form) => dispatch({ type: REGISTER, form }),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
+export default connect(
+  mapStateToProps,
+  { 
+    onFieldChange,
+    onSubmit,
+  }
+)(RegistrationForm);

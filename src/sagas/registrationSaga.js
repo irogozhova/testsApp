@@ -1,14 +1,14 @@
 import { all, takeEvery, put } from "redux-saga/effects";
 import axios from 'axios';
-import { REGISTER } from "constants/common";
+import { REGISTER } from "actions/constants";
 
-function* registerSaga({form}) {
+function* registerSaga({ payload }) {
   const { 
     login,
     password,
     confirmPassword,
     isAdmin
-  } = form;
+  } = payload;
 
   try {
     const result = yield axios({
@@ -28,7 +28,7 @@ function* registerSaga({form}) {
     yield put({
       type: `REGISTER_SUCCESS`,
       payload: {
-          data: result.data,
+        data: result.data,
       },
     })
     

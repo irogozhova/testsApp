@@ -1,4 +1,4 @@
-import { UPDATE_FIELD } from "constants/common";
+import { UPDATE_FIELD } from "actions/constants";
 
 const initialState = {
   form: {
@@ -10,16 +10,19 @@ const initialState = {
 };
 
 export default function registration(state = initialState, action) {
-  if (action.type === UPDATE_FIELD) {
-    const { key, value } = action;
+  const { type, payload } = action;
 
-    return {
-      ...state,
-      form: {
-        ...state.form,
-        [key]: value,
+  switch (type) {
+    case UPDATE_FIELD:
+      const { name, value } = payload;
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          [name]: value,
+        }
       }
-    }
+    default:
+      return state;
   }
-  return state;
 };
