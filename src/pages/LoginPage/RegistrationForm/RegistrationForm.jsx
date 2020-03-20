@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { onFieldChange, onSubmit } from "actions/registration";
-import classnames from 'classnames';
 
 import InputField from './InputField';
 
@@ -72,13 +71,15 @@ class RegistrationForm extends PureComponent {
         confirmPassword,
         isAdmin
       },
+      isSendingInProgress,
     } = this.props;
 
     const { errorMessages, emptyFields } = this.state;
+    console.log(isSendingInProgress);
 
     return (
       <div className={styles.root}>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <InputField
             type="text"
             name="login"
@@ -112,7 +113,12 @@ class RegistrationForm extends PureComponent {
               onChange={this.handleFormFieldChange}
             />
           </label>
-          <input type="submit" value="Зарегистрироваться" />
+          <button
+            onClick={this.handleSubmit}
+            disabled={isSendingInProgress}
+          >
+            Зарегистрироваться
+          </button>
           <div>
             {errorMessages.map((message, index) => <div key={index}>{message}</div>)}
           </div>
@@ -123,7 +129,12 @@ class RegistrationForm extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  return { form: state.registration.form };
+  const { registration: { form, isSendingInProgress} } = state;
+
+  return { 
+    form,
+    isSendingInProgress,
+  };
 };
 
 export default connect(
