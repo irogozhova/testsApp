@@ -1,0 +1,10 @@
+.root {
+  .field {
+    &.emptyField {
+      color: red;
+      input {
+        border-color: red;
+      }
+    }
+  }
+}

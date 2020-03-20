@@ -1,17 +1,65 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { onFieldChange, onSubmit } from "actions/registration";
+import classnames from 'classnames';
+
+import styles from './RegistrationForm.module.scss';
 
 class RegistrationForm extends PureComponent {
+  state = {
+    emptyFields: {},
+    errorMessages: []
+  }
 
   handleFormFieldChange = (event) => {
     const { target: { name, value, checked } } = event;
     this.props.onFieldChange({ name, value: checked || value });
   }
 
+  validateAndSubmitForm = () => {
+    const { form } = this.props;
+    const { password, confirmPassword } = form;
+
+    const emptyFields = {};
+    const errorMessages = [];
+
+    let isEmptyFields = false;
+
+    for (let [key, value] of Object.entries(form)) {
+      if (value === '') {
+        emptyFields[key] = true;
+        isEmptyFields = true;
+      }
+    }
+
+    if (isEmptyFields) {
+      errorMessages.push('Не все поля заполнены');
+    }
+
+    if (password !== '') {
+      if (password.length < 6) {
+        errorMessages.push('Пароль должен содержать не менее 6 символов');
+      } 
+      
+      if (!(/^[A-Za-z0-9_]+$/i.test(password))) {
+        errorMessages.push('Пароль может содержать только латинские символы и/или цифры/нижнее подчеркивание');
+      }
+
+      if (password !== confirmPassword) {
+        errorMessages.push('Пароли не совпадают');
+      }
+    }
+
+    this.setState({ emptyFields, errorMessages });
+
+    if (errorMessages.length === 0) {
+      this.props.onSubmit(this.props.form);
+    }
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.props.form);
+    this.validateAndSubmitForm();
   }
 
   render() {
@@ -24,10 +72,17 @@ class RegistrationForm extends PureComponent {
       },
     } = this.props;
 
+    const { errorMessages, emptyFields } = this.state;
+
     return (
-      <div>
+      <div className={styles.root}>
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <label
+            className={classnames(
+              styles['field'],
+              { [styles['emptyField']]: emptyFields.login }
+            )}
+          >
             логин:
             <input
               type="text"
@@ -36,7 +91,12 @@ class RegistrationForm extends PureComponent {
               onChange={this.handleFormFieldChange}
             />
           </label>
-          <label>
+          <label
+            className={classnames(
+              styles['field'],
+              { [styles['emptyField']]: emptyFields.password }
+            )}
+          >
             пароль:
             <input
               type="password"
@@ -45,7 +105,12 @@ class RegistrationForm extends PureComponent {
               onChange={this.handleFormFieldChange}
             />
           </label>
-          <label>
+          <label
+            className={classnames(
+              styles['field'],
+              { [styles['emptyField']]: emptyFields.confirmPassword }
+            )}
+          >
             подтвердите пароль:
             <input
               type="password"
@@ -55,7 +120,7 @@ class RegistrationForm extends PureComponent {
             />
           </label>
           <label>
-            Админ:
+            админ:
             <input
               name="isAdmin"
               type="checkbox"
@@ -63,7 +128,10 @@ class RegistrationForm extends PureComponent {
               onChange={this.handleFormFieldChange}
             />
           </label>
-          <button type="submit" value="Зарегистрироваться" />
+          <input type="submit" value="Зарегистрироваться" />
+          <div>
+            {errorMessages.map((message, index) => <div key={index}>{message}</div>)}
+          </div>
         </form>
       </div>
     );
@@ -73,12 +141,6 @@ class RegistrationForm extends PureComponent {
 const mapStateToProps = state => {
   return { form: state.registration.form };
 };
-
-// const mapDispatchToProps = dispatch => ({
-//   onFieldChange: (key, value) =>
-//     dispatch({ type: UPDATE_FIELD, key, value }),
-//   onSubmit: (form) => dispatch({ type: REGISTER, form }),
-// });
 
 export default connect(
   mapStateToProps,
