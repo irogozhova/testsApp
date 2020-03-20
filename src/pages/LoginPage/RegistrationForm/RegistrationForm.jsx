@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { onFieldChange, onSubmit } from "actions/registration";
 import classnames from 'classnames';
 
+import InputField from './InputField';
+
 import styles from './RegistrationForm.module.scss';
 
 class RegistrationForm extends PureComponent {
@@ -77,50 +79,32 @@ class RegistrationForm extends PureComponent {
     return (
       <div className={styles.root}>
         <form onSubmit={this.handleSubmit}>
-          <label
-            className={classnames(
-              styles['field'],
-              { [styles['emptyField']]: emptyFields.login }
-            )}
-          >
-            логин:
-            <input
-              type="text"
-              name="login"
-              value={login}
-              onChange={this.handleFormFieldChange}
-            />
-          </label>
-          <label
-            className={classnames(
-              styles['field'],
-              { [styles['emptyField']]: emptyFields.password }
-            )}
-          >
-            пароль:
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleFormFieldChange}
-            />
-          </label>
-          <label
-            className={classnames(
-              styles['field'],
-              { [styles['emptyField']]: emptyFields.confirmPassword }
-            )}
-          >
-            подтвердите пароль:
-            <input
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={this.handleFormFieldChange}
-            />
-          </label>
+          <InputField
+            type="text"
+            name="login"
+            value={login}
+            text="Имя пользователя"
+            onChange={this.handleFormFieldChange}
+            hasError={emptyFields.login}
+          />
+          <InputField
+            type="password"
+            name="password"
+            value={password}
+            text="Пароль"
+            onChange={this.handleFormFieldChange}
+            hasError={emptyFields.password}
+          />
+          <InputField
+            type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            text="Подтверждение пароля"
+            onChange={this.handleFormFieldChange}
+            hasError={emptyFields.confirmPassword}
+          />
           <label>
-            админ:
+            Админ:
             <input
               name="isAdmin"
               type="checkbox"

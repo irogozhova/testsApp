@@ -1,0 +1,9 @@
+.root {
+  &.hasError {
+    color: red;
+
+    input {
+      border-color: red;
+    }
+  }
+}
