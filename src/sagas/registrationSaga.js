@@ -1,5 +1,8 @@
 import { all, takeEvery, put } from "redux-saga/effects";
 import axios from 'axios';
+
+import history from 'utils/history';
+
 import { REGISTER } from "actions/constants";
 
 function* registerSaga({ payload }) {
@@ -31,7 +34,8 @@ function* registerSaga({ payload }) {
         data: result.data,
       },
     })
-    
+    yield history.push('/tests');
+
   } catch ( {message, response} ) {
     yield put({
       type: `REGISTER_FAILURE`,

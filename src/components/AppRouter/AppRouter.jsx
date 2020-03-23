@@ -1,12 +1,13 @@
 /*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router as BrowserRouter, Switch, Route } from 'react-router-dom';
+import history from 'utils/history';
 
 // import NotFoundPage from '_pages/NotFoundPage';
 
 const Router = ({ routes }) => (
-  <BrowserRouter>
+  <BrowserRouter history={history}>
     <Switch>
       {routes.map(({ path, exact, component: Component }) => (
         <Route
