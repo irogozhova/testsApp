@@ -1,4 +1,10 @@
-import { UPDATE_FIELD, REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE} from "actions/constants";
+import { 
+  UPDATE_FIELD,
+  UPDATE_ERROR_MESSAGES,
+  REGISTER,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE
+} from "actions/constants";
 
 const initialState = {
   form: {
@@ -8,6 +14,7 @@ const initialState = {
     isAdmin: false,
   },
   isSendingInProgress: false,
+  errorMessages: [],
 };
 
 export default function registration(state = initialState, action) {
@@ -16,6 +23,7 @@ export default function registration(state = initialState, action) {
   switch (type) {
     case UPDATE_FIELD:
       const { name, value } = payload;
+
       return {
         ...state,
         form: {
@@ -23,17 +31,43 @@ export default function registration(state = initialState, action) {
           [name]: value,
         }
       }
+
+    case UPDATE_ERROR_MESSAGES:
+      const { payload: errorMessages } = action;
+
+      return {
+        ...state,
+        errorMessages: errorMessages,
+      }
+
     case REGISTER:
       return {
         ...state,
         isSendingInProgress: true,
       }
+
     case REGISTER_SUCCESS:
-    case REGISTER_FAILURE:
       return {
         ...state,
         isSendingInProgress: false,
       }
+
+    case REGISTER_FAILURE:
+      const { response } = action;
+
+      const error = (response.username[0] === 'has already been taken') ?
+        'Пользователь с таким именем уже существует. Придумайте другое имя.' :
+        'Something went wrong'
+
+      return {
+        ...state,
+        isSendingInProgress: false,
+        errorMessages: [
+          ...state.errorMessages,
+          error,
+        ]
+      }
+
     default:
       return state;
   }

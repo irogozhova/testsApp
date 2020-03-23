@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
-import { onFieldChange, onSubmit } from "actions/registration";
+import { onFieldChange, onSubmit, onErrorMessagesUpdate } from "actions/registration";
 
 import InputField from './InputField';
 
@@ -9,7 +9,6 @@ import styles from './RegistrationForm.module.scss';
 class RegistrationForm extends PureComponent {
   state = {
     emptyFields: {},
-    errorMessages: []
   }
 
   handleFormFieldChange = (event) => {
@@ -51,7 +50,8 @@ class RegistrationForm extends PureComponent {
       }
     }
 
-    this.setState({ emptyFields, errorMessages });
+    this.setState({ emptyFields });
+    this.props.onErrorMessagesUpdate(errorMessages);
 
     if (errorMessages.length === 0) {
       this.props.onSubmit(this.props.form);
@@ -62,7 +62,7 @@ class RegistrationForm extends PureComponent {
     event.preventDefault();
     this.validateAndSubmitForm();
   }
-
+  
   render() {
     const { 
       form: { 
@@ -71,11 +71,11 @@ class RegistrationForm extends PureComponent {
         confirmPassword,
         isAdmin
       },
+      errorMessages,
       isSendingInProgress,
     } = this.props;
-
-    const { errorMessages, emptyFields } = this.state;
-    console.log(isSendingInProgress);
+    
+    const { emptyFields } = this.state;
 
     return (
       <div className={styles.root}>
@@ -129,11 +129,18 @@ class RegistrationForm extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { registration: { form, isSendingInProgress} } = state;
+  const { 
+    registration: { 
+      form, 
+      errorMessages,
+      isSendingInProgress,
+    }
+  } = state;
 
   return { 
     form,
     isSendingInProgress,
+    errorMessages,
   };
 };
 
@@ -142,5 +149,6 @@ export default connect(
   { 
     onFieldChange,
     onSubmit,
+    onErrorMessagesUpdate,
   }
 )(RegistrationForm);
