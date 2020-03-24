@@ -1,4 +1,4 @@
 export const pagesLink = {
-  login: '/',
-  allTests: '/tests',
+  login: '/login',
+  allTests: '/',
 };

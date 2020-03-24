@@ -34,7 +34,7 @@ function* registerSaga({ payload }) {
         data: result.data,
       },
     })
-    yield history.push('/tests');
+    yield history.push('/');
 
   } catch ( {message, response} ) {
     yield put({

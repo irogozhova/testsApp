@@ -15,5 +15,6 @@ export default [
     exact: true,
     cache: false,
     component: AllTestsPage,
+    isPrivate: true,
   },
 ];
