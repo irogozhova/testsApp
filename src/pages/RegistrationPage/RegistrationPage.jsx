@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { onFieldChange, onSubmit, onErrorMessagesUpdate } from "actions/registration";
 
-import InputField from './InputField';
+import InputField from 'components/InputField';
 
-import styles from './RegistrationForm.module.scss';
+import styles from './RegistrationPage.module.scss';
 
-class RegistrationForm extends PureComponent {
+class RegistrationPage extends PureComponent {
   state = {
     emptyFields: {},
   }
@@ -79,6 +79,7 @@ class RegistrationForm extends PureComponent {
 
     return (
       <div className={styles.root}>
+        <h1>Регистрация</h1>
         <form>
           <InputField
             type="text"
@@ -151,4 +152,4 @@ export default connect(
     onSubmit,
     onErrorMessagesUpdate,
   }
-)(RegistrationForm);
+)(RegistrationPage);

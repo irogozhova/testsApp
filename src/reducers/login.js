@@ -1,25 +1,21 @@
 import { 
   UPDATE_FIELD,
   UPDATE_ERROR_MESSAGES,
-  REGISTER,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
 } from "actions/constants";
 
 const initialState = {
   form: {
     login: '',
     password: '',
-    confirmPassword: '',
-    isAdmin: false,
   },
   isSendingInProgress: false,
   errorMessages: [],
 };
 
-export default function(state = initialState, action) {
-  const { type, payload } = action;
-
+export default function(state = initialState, { type, payload }) {
   switch (type) {
     case UPDATE_FIELD:
       const { name, value } = payload;
@@ -33,30 +29,28 @@ export default function(state = initialState, action) {
       }
 
     case UPDATE_ERROR_MESSAGES:
-      const { payload: errorMessages } = action;
-
       return {
         ...state,
-        errorMessages: errorMessages,
+        errorMessages: payload,
       }
 
-    case REGISTER:
+    case LOGIN:
       return {
         ...state,
         isSendingInProgress: true,
       }
 
-    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         isSendingInProgress: false,
       }
 
-    case REGISTER_FAILURE:
-      const { response } = action;
+    case LOGIN_FAILURE:
+      const { error } = payload;
 
-      const error = (response.username[0] === 'has already been taken') ?
-        'Пользователь с таким именем уже существует. Придумайте другое имя.' :
+      const errorMessage = (error === 'username or password is invalid') ?
+        'Неверное имя пользователя или пароль.' :
         'Something went wrong'
 
       return {
@@ -64,7 +58,7 @@ export default function(state = initialState, action) {
         isSendingInProgress: false,
         errorMessages: [
           ...state.errorMessages,
-          error,
+          errorMessage,
         ]
       }
 

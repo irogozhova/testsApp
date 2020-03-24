@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import registrationForm from  './registrationForm';
+import login from './login';
 import currentUser from './currentUser';
+import registrationForm from  './registrationForm';
 
 export default combineReducers({
-  registration: registrationForm,
+  login,
   currentUser,
+  registration: registrationForm,
 })
