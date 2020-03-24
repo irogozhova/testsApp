@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Router as BrowserRouter, Switch, Route } from 'react-router-dom';

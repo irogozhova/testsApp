@@ -26,6 +26,7 @@ function* registerSaga({ payload }) {
         password_confirmation: confirmPassword,
         is_admin: isAdmin,
       },
+      withCredentials: true,
     });
 
     yield put({
