@@ -1,4 +1,7 @@
 import React, { Fragment, PureComponent } from 'react';
+import { Link } from "react-router-dom";
+
+import LogoutButton from 'components/LogoutButton';
 
 // import styles from './HomePage.scss';
 
@@ -7,6 +10,8 @@ class AllTestsPage extends PureComponent {
     return (
       <Fragment>
         AllTestsPage
+        <Link to="/login">Авторизация</Link>
+        <LogoutButton />
       </Fragment>
     );
   }

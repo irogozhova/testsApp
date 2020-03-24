@@ -3,37 +3,28 @@ import axios from 'axios';
 
 import history from 'utils/history';
 
-import { LOGIN } from "actions/constants";
+import { LOGOUT } from "actions/constants";
 
-function* loginSaga({ payload }) {
-  const { 
-    login,
-    password,
-  } = payload;
-
+function* logoutSaga() {
   try {
     const result = yield axios({
       baseURL: 'https://snp-tests.herokuapp.com/api/v1/',
-      url: '/signin',
-      method: 'post',
-      data: {
-        username: login,
-        password,
-      },
+      url: '/logout',
+      method: 'delete',
       withCredentials: true,
     });
 
     yield put({
-      type: `LOGIN_SUCCESS`,
+      type: `LOGOUT_SUCCESS`,
       payload: {
         data: result.data,
       },
     })
-    yield history.push('/');
+    yield history.push('/login');
 
   } catch ( {message, response} ) {
     yield put({
-      type: `LOGIN_FAILURE`,
+      type: `LOGOUT_FAILURE`,
       payload: response.data,
     })
   }
@@ -41,6 +32,6 @@ function* loginSaga({ payload }) {
 
 export default function* () {
   yield all([
-    takeEvery(LOGIN, loginSaga), // research takeEvery vs takeLatest
+    takeEvery(LOGOUT, logoutSaga),
   ])
 }
