@@ -13,13 +13,14 @@ function InputField({
 }) {
   return (
     <label className={classnames(styles['root'], { [styles['hasError']]: hasError })}>
-      {text}:
       <input
         type={type}
         name={name}
         value={value}
+        placeholder={text}
         onChange={onChange}
       />
+      <span className={styles.focusInput} />
     </label>
   );
 }

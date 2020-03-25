@@ -63,35 +63,51 @@ class LoginPage extends PureComponent {
 
     return (
       <div className={styles.root}>
-        <h1>Авторизация</h1>
-        <form>
-          <InputField
-            type="text"
-            name="login"
-            value={login}
-            text="Имя пользователя"
-            onChange={this.handleFormFieldChange}
-            hasError={emptyFields.login}
-          />
-          <InputField
-            type="password"
-            name="password"
-            value={password}
-            text="Пароль"
-            onChange={this.handleFormFieldChange}
-            hasError={emptyFields.password}
-          />
-          <button
-            onClick={this.handleSubmit}
-            disabled={isSendingInProgress}
-          >
-            Войти
-          </button>
-          <div>
-            {errorMessages.map((message, index) => <div key={index}>{message}</div>)}
+        <div className={styles.formWrapper}>
+          <div className={styles.formHeader}>
+            <h1>Войти</h1>
           </div>
-        </form>
-        <Link to="/registration">Регистрация</Link>
+          <form>
+            <InputField
+              type="text"
+              name="login"
+              value={login}
+              text="Логин"
+              onChange={this.handleFormFieldChange}
+              hasError={emptyFields.login}
+            />
+            <InputField
+              type="password"
+              name="password"
+              value={password}
+              text="Пароль"
+              onChange={this.handleFormFieldChange}
+              hasError={emptyFields.password}
+            />
+            <button
+              type="button"
+              className={styles.submitBtn}
+              onClick={this.handleSubmit}
+              disabled={isSendingInProgress}
+            >
+              Войти
+            </button>
+            <div>
+              {errorMessages.map((message, index) => <div key={index}>{message}</div>)}
+            </div>
+          </form>
+          <div className={styles.registerWrapper}>
+            <p className={styles.text}>
+              Еще не зарегистрированы?
+            </p>
+            <Link
+              to="/registration"
+              className={styles.link}
+            >
+              Регистрация
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
