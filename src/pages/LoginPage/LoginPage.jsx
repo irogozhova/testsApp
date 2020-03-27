@@ -4,6 +4,7 @@ import { onFieldChange, onSubmit, onErrorMessagesUpdate } from "actions/login";
 import { Link } from "react-router-dom";
 
 import InputField from 'components/InputField';
+import ErrorMessages from 'components/ErrorMessages';
 
 import styles from './LoginPage.module.scss';
 
@@ -92,9 +93,9 @@ class LoginPage extends PureComponent {
             >
               Войти
             </button>
-            <div>
-              {errorMessages.map((message, index) => <div key={index}>{message}</div>)}
-            </div>
+            <ErrorMessages
+              messages={errorMessages}
+            />
           </form>
           <div className={styles.registerWrapper}>
             <p className={styles.text}>

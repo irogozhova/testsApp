@@ -3,13 +3,27 @@
 .root {
   position: relative;
   display: flex;
+  align-items: center;
   width: 100%;
 
   &.hasError {
-    color: red;
+    &::before {
+      content: '';
+      position: absolute;
+      right: 34px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid $red;
+      z-index: 3;
+    }
 
-    input {
-      border-color: red;
+    &::after {
+      content: '!';
+      position: absolute;
+      right: 45px;
+      color: $red;
+      z-index: 3;
     }
   }
 
