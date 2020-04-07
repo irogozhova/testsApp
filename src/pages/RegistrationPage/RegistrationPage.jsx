@@ -3,17 +3,14 @@ import { connect } from "react-redux";
 import { onFieldChange, onSubmit, onErrorMessagesUpdate } from "actions/registration";
 
 import InputField from 'components/InputField';
+import CheckBox from 'components/CheckBox';
+import ErrorMessages from 'components/ErrorMessages';
 
 import styles from './RegistrationPage.module.scss';
 
 class RegistrationPage extends PureComponent {
   state = {
     emptyFields: {},
-  }
-
-  handleFormFieldChange = (event) => {
-    const { target: { name, value, checked } } = event;
-    this.props.onFieldChange({ name, value: checked || value });
   }
 
   validateAndSubmitForm = () => {
@@ -73,57 +70,63 @@ class RegistrationPage extends PureComponent {
       },
       errorMessages,
       isSendingInProgress,
+      onFieldChange,
     } = this.props;
     
     const { emptyFields } = this.state;
 
     return (
       <div className={styles.root}>
-        <h1>Регистрация</h1>
-        <form>
-          <InputField
-            type="text"
-            name="login"
-            value={login}
-            text="Имя пользователя"
-            onChange={this.handleFormFieldChange}
-            hasError={emptyFields.login}
-          />
-          <InputField
-            type="password"
-            name="password"
-            value={password}
-            text="Пароль"
-            onChange={this.handleFormFieldChange}
-            hasError={emptyFields.password}
-          />
-          <InputField
-            type="password"
-            name="confirmPassword"
-            value={confirmPassword}
-            text="Подтверждение пароля"
-            onChange={this.handleFormFieldChange}
-            hasError={emptyFields.confirmPassword}
-          />
-          <label>
-            Админ:
-            <input
-              name="isAdmin"
-              type="checkbox"
-              defaultChecked={isAdmin}
-              onChange={this.handleFormFieldChange}
-            />
-          </label>
-          <button
-            onClick={this.handleSubmit}
-            disabled={isSendingInProgress}
-          >
-            Зарегистрироваться
-          </button>
-          <div>
-            {errorMessages.map((message, index) => <div key={index}>{message}</div>)}
+        <div className={styles.formWrapper}>
+          <div className={styles.formHeader}>
+            <h1>Регистрация</h1>
           </div>
-        </form>
+          <form>
+            <InputField
+              type="text"
+              name="login"
+              value={login}
+              text="Имя пользователя"
+              onChange={onFieldChange}
+              hasError={emptyFields.login}
+            />
+            <InputField
+              type="password"
+              name="password"
+              value={password}
+              text="Пароль"
+              onChange={onFieldChange}
+              hasError={emptyFields.password}
+            />
+            <InputField
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              text="Подтверждение пароля"
+              onChange={onFieldChange}
+              hasError={emptyFields.confirmPassword}
+            />
+            <CheckBox
+              name="isAdmin"
+              label="Админ:"
+              checked={isAdmin}
+              onChange={onFieldChange}
+            />
+            <button
+              type="button"
+              className={styles.submitBtn}
+              onClick={this.handleSubmit}
+              disabled={isSendingInProgress}
+            >
+              Зарегистрироваться
+            </button>
+            <div className={styles.errorMessagesWrapper}>
+              <ErrorMessages
+                messages={errorMessages}
+              />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

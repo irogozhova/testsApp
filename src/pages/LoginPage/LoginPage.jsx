@@ -13,11 +13,6 @@ class LoginPage extends PureComponent {
     emptyFields: {},
   }
 
-  handleFormFieldChange = (event) => {
-    const { target: { name, value } } = event;
-    this.props.onFieldChange({ name, value });
-  }
-
   validateAndSubmitForm = () => {
     const { form } = this.props;
 
@@ -58,6 +53,7 @@ class LoginPage extends PureComponent {
       },
       errorMessages,
       isSendingInProgress,
+      onFieldChange,
     } = this.props;
 
     const { emptyFields } = this.state;
@@ -74,7 +70,7 @@ class LoginPage extends PureComponent {
               name="login"
               value={login}
               text="Логин"
-              onChange={this.handleFormFieldChange}
+              onChange={onFieldChange}
               hasError={emptyFields.login}
             />
             <InputField
@@ -82,7 +78,7 @@ class LoginPage extends PureComponent {
               name="password"
               value={password}
               text="Пароль"
-              onChange={this.handleFormFieldChange}
+              onChange={onFieldChange}
               hasError={emptyFields.password}
             />
             <button
@@ -93,9 +89,12 @@ class LoginPage extends PureComponent {
             >
               Войти
             </button>
-            <ErrorMessages
-              messages={errorMessages}
-            />
+            <div className={styles.errorMessagesWrapper}>
+              <ErrorMessages
+                className={styles.errors}
+                messages={errorMessages}
+              />
+            </div>
           </form>
           <div className={styles.registerWrapper}>
             <p className={styles.text}>
