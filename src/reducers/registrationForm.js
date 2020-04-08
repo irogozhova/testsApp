@@ -1,6 +1,6 @@
 import { 
-  UPDATE_FIELD,
-  UPDATE_ERROR_MESSAGES,
+  REGISTRATION_UPDATE_FIELD,
+  REGISTRATION_UPDATE_ERROR_MESSAGES,
   REGISTER,
   REGISTER_SUCCESS,
   REGISTER_FAILURE
@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case UPDATE_FIELD:
+    case REGISTRATION_UPDATE_FIELD:
       const { name, value } = payload;
 
       return {
@@ -32,7 +32,7 @@ export default function(state = initialState, action) {
         }
       }
 
-    case UPDATE_ERROR_MESSAGES:
+    case REGISTRATION_UPDATE_ERROR_MESSAGES:
       const { payload: errorMessages } = action;
 
       return {

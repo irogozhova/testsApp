@@ -1,6 +1,6 @@
 import { 
-  UPDATE_FIELD,
-  UPDATE_ERROR_MESSAGES,
+  LOGIN_UPDATE_FIELD,
+  LOGIN_UPDATE_ERROR_MESSAGES,
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -17,7 +17,7 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
   switch (type) {
-    case UPDATE_FIELD:
+    case LOGIN_UPDATE_FIELD:
       const { name, value } = payload;
 
       return {
@@ -28,7 +28,7 @@ export default function(state = initialState, { type, payload }) {
         }
       }
 
-    case UPDATE_ERROR_MESSAGES:
+    case LOGIN_UPDATE_ERROR_MESSAGES:
       return {
         ...state,
         errorMessages: payload,
