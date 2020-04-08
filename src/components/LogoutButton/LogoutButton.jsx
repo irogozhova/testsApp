@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { onLogout } from "actions/logout";
 
+import { isSendingInProgressSelector } from "reducers/logoutSelectors";
+
 class LogoutButton extends Component {
   render() {
     const { isSendingInProgress } = this.props;
@@ -18,10 +20,8 @@ class LogoutButton extends Component {
 }
 
 const mapStateToProps = state => {
-  const { isSendingInProgress } = state;
-
   return { 
-    isSendingInProgress,
+    isSendingInProgress: isSendingInProgressSelector(state),
   };
 };
 

@@ -3,6 +3,12 @@ import { connect } from "react-redux";
 import { onFieldChange, onSubmit, onErrorMessagesUpdate } from "actions/login";
 import { Link } from "react-router-dom";
 
+import { 
+  formSelector,
+  isSendingInProgressSelector,
+  errorMessagesSelector,
+} from "reducers/loginSelectors";
+
 import InputField from 'components/InputField';
 import ErrorMessages from 'components/ErrorMessages';
 
@@ -47,7 +53,7 @@ class LoginPage extends PureComponent {
 
   render() {
     const { 
-      form: { 
+      form: {
         login,
         password,
       },
@@ -114,18 +120,10 @@ class LoginPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { 
-    login: { 
-      form, 
-      isSendingInProgress,
-      errorMessages,
-    }
-  } = state;
-
-  return { 
-    form,
-    isSendingInProgress,
-    errorMessages,
+  return {
+    form: formSelector(state),
+    isSendingInProgress: isSendingInProgressSelector(state),
+    errorMessages: errorMessagesSelector(state),
   };
 };
 

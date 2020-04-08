@@ -2,6 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { onFieldChange, onSubmit, onErrorMessagesUpdate } from "actions/registration";
 
+import { 
+  formSelector,
+  isSendingInProgressSelector,
+  errorMessagesSelector,
+} from "reducers/registrationFormSelectors";
+
 import InputField from 'components/InputField';
 import CheckBox from 'components/CheckBox';
 import ErrorMessages from 'components/ErrorMessages';
@@ -133,18 +139,10 @@ class RegistrationPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { 
-    registration: { 
-      form, 
-      errorMessages,
-      isSendingInProgress,
-    }
-  } = state;
-
-  return { 
-    form,
-    isSendingInProgress,
-    errorMessages,
+  return {
+    form: formSelector(state),
+    isSendingInProgress: isSendingInProgressSelector(state),
+    errorMessages: errorMessagesSelector(state),
   };
 };
 
