@@ -2,6 +2,10 @@ import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getCurrentUser } from "actions/currentUser";
+import { 
+  currentUserStatusSelector,
+  isCurrentUserSelector,
+} from "reducers/currentUserSelectors";
 
 class PrivateRoute extends PureComponent {
   componentDidMount() {
@@ -29,8 +33,8 @@ class PrivateRoute extends PureComponent {
 
 const mapStateToProps = state => {
   return { 
-    status: state.currentUser.status,
-    isCurrentUser: Boolean(state.currentUser.data),
+    status: currentUserStatusSelector(state),
+    isCurrentUser: isCurrentUserSelector(state),
   };
 };
 
