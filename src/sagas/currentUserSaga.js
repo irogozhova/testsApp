@@ -1,34 +1,17 @@
-import { all, takeEvery, put } from "redux-saga/effects";
-import axios from 'axios';
+import { all, takeEvery } from "redux-saga/effects";
+import { api } from './api';
 
 import { GET_CURRENT_USER } from "actions/constants";
 
-function* getCurrentUserSaga() {
-  try {
-    const result = yield axios({
-      baseURL: 'https://snp-tests.herokuapp.com/api/v1/',
-      url: '/users/current',
-      method: 'get',
-      withCredentials: true,
-    });
-
-    yield put({
-      type: `GET_CURRENT_USER_SUCCESS`,
-      payload: {
-        data: result.data,
-      },
-    })
-
-  } catch ( {message, response} ) {
-    yield put({
-      type: `GET_CURRENT_USER_FAILURE`,
-      response: response.data,
-    })
-  }
-} 
+function* getCurrentUserSaga(action) {
+  yield api({
+    action,
+    url: '/users/current',
+  });
+}
 
 export default function* () {
   yield all([
-    takeEvery(GET_CURRENT_USER, getCurrentUserSaga), // research takeEvery vs takeLatest
+    takeEvery(GET_CURRENT_USER, getCurrentUserSaga),
   ])
 }

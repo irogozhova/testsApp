@@ -1,49 +1,29 @@
-import { all, takeEvery, put } from "redux-saga/effects";
-import axios from 'axios';
-
-import history from 'utils/history';
+import { all, takeEvery } from "redux-saga/effects";
+import { api } from './api';
 
 import { REGISTER } from "actions/constants";
 
-function* registerSaga({ payload }) {
+function* registerSaga(action) {
   const { 
     login,
     password,
     confirmPassword,
-    isAdmin
-  } = payload;
+    isAdmin,
+  } = action.payload;
 
-  try {
-    const result = yield axios({
-      baseURL: 'https://snp-tests.herokuapp.com/api/v1/',
-      url: '/signup',
-      method: 'post',
-      headers: {},
-      params: {},
-      data: {
-        username: login,
-        password,
-        password_confirmation: confirmPassword,
-        is_admin: isAdmin,
-      },
-      withCredentials: true,
-    });
-
-    yield put({
-      type: `REGISTER_SUCCESS`,
-      payload: {
-        data: result.data,
-      },
-    })
-    yield history.push('/');
-
-  } catch ( {message, response} ) {
-    yield put({
-      type: `REGISTER_FAILURE`,
-      response: response.data,
-    })
-  }
-} 
+  yield api({
+    action,
+    method: 'post',
+    url: '/signup',
+    data: {
+      username: login,
+      password,
+      password_confirmation: confirmPassword,
+      is_admin: isAdmin,
+    },
+    successRedirectTo: '/',
+  });
+}
 
 export default function* () {
   yield all([

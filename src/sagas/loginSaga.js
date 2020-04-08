@@ -1,43 +1,22 @@
-import { all, takeEvery, put } from "redux-saga/effects";
-import axios from 'axios';
-
-import history from 'utils/history';
+import { all, takeEvery } from "redux-saga/effects";
+import { api } from './api';
 
 import { LOGIN } from "actions/constants";
 
-function* loginSaga({ payload }) {
-  const { 
-    login,
-    password,
-  } = payload;
+function* loginSaga(action) {
+  const { login, password } = action.payload;
 
-  try {
-    const result = yield axios({
-      baseURL: 'https://snp-tests.herokuapp.com/api/v1/',
-      url: '/signin',
-      method: 'post',
-      data: {
-        username: login,
-        password,
-      },
-      withCredentials: true,
-    });
-
-    yield put({
-      type: `LOGIN_SUCCESS`,
-      payload: {
-        data: result.data,
-      },
-    })
-    yield history.push('/');
-
-  } catch ( {message, response} ) {
-    yield put({
-      type: `LOGIN_FAILURE`,
-      payload: response.data,
-    })
-  }
-} 
+  yield api({
+    action,
+    method: 'post',
+    url: '/signin',
+    data: {
+      username: login,
+      password,
+    },
+    successRedirectTo: '/',
+  });
+}
 
 export default function* () {
   yield all([
