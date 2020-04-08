@@ -72,9 +72,12 @@
   }
 
   .errorMessagesWrapper {
+    display: flex;
+    align-items: center;
     position: absolute;
-    top: 400px;
+    top: 378px;
     width: 100%;
+    height: 98px;
   }
 
   .submitBtn {

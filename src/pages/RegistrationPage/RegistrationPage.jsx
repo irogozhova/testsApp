@@ -21,12 +21,20 @@ class RegistrationPage extends PureComponent {
 
   validateAndSubmitForm = () => {
     const { form } = this.props;
-    const { password, confirmPassword } = form;
+    const { login, password, confirmPassword } = form;
 
     const emptyFields = {};
     const errorMessages = [];
 
     let isEmptyFields = false;
+
+    const testForLatinSymbols = (field) => {
+      const fieldName = field === password ? 'Пароль' : 'Логин';
+
+      if (!(/^[A-Za-z0-9_]+$/i.test(field))) {
+        errorMessages.push(`${fieldName} - только латинские символы, цифры и нижнее подчеркивание`);
+      }
+    };
 
     for (let [key, value] of Object.entries(form)) {
       if (value === '') {
@@ -39,14 +47,16 @@ class RegistrationPage extends PureComponent {
       errorMessages.push('Не все поля заполнены');
     }
 
+    if (login !== '') {
+      testForLatinSymbols(login);
+    }
+
     if (password !== '') {
       if (password.length < 6) {
         errorMessages.push('Пароль должен содержать не менее 6 символов');
       } 
       
-      if (!(/^[A-Za-z0-9_]+$/i.test(password))) {
-        errorMessages.push('Пароль может содержать только латинские символы и/или цифры/нижнее подчеркивание');
-      }
+      testForLatinSymbols(password);
 
       if (password !== confirmPassword) {
         errorMessages.push('Пароли не совпадают');

@@ -1,9 +1,14 @@
 @import 'styles/variables.scss';
 
 .root {
-  width: 100%;
+  width: 99%;
+  margin: 0 auto;
   text-align: center;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
   color: $red;
+
+  & > div {
+    margin: 5px 0;
+  }
 }
