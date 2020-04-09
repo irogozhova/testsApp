@@ -21,7 +21,7 @@ export function* api({
     yield put({
       type: `${action.type}_SUCCESS`,
       payload: {
-        data: result.data,
+        data: result,
       },
     });
     if (successRedirectTo) {

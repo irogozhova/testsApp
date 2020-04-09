@@ -11,6 +11,7 @@ class AllTestsPage extends PureComponent {
       <Fragment>
         AllTestsPage
         <Link to="/login">Авторизация</Link>
+        <Link to="/addNewTest">Создать тест</Link>
         <LogoutButton />
       </Fragment>
     );

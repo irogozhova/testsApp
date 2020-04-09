@@ -16,6 +16,7 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         status: 'LOADING',
       }
+
     case GET_CURRENT_USER_SUCCESS:
       return {
         ...state,
