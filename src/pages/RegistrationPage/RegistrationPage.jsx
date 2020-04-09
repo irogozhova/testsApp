@@ -128,14 +128,16 @@ class RegistrationPage extends PureComponent {
               checked={isAdmin}
               onChange={onFieldChange}
             />
-            <button
-              type="button"
-              className={styles.submitBtn}
-              onClick={this.handleSubmit}
-              disabled={isSendingInProgress}
-            >
-              Зарегистрироваться
-            </button>
+            <div className={styles.submitBtnWrapper}>
+              <button
+                type="button"
+                className={styles.submitBtn}
+                onClick={this.handleSubmit}
+                disabled={isSendingInProgress}
+              >
+                Зарегистрироваться
+              </button>
+            </div>
             <div className={styles.errorMessagesWrapper}>
               <ErrorMessages
                 messages={errorMessages}

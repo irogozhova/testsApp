@@ -87,14 +87,16 @@ class LoginPage extends PureComponent {
               onChange={onFieldChange}
               hasError={emptyFields.password}
             />
-            <button
-              type="button"
-              className={styles.submitBtn}
-              onClick={this.handleSubmit}
-              disabled={isSendingInProgress}
-            >
-              Войти
-            </button>
+            <div className={styles.submitBtnWrapper}>
+              <button
+                type="button"
+                className={styles.submitBtn}
+                onClick={this.handleSubmit}
+                disabled={isSendingInProgress}
+              >
+                Войти
+              </button>
+            </div>
             <div className={styles.errorMessagesWrapper}>
               <ErrorMessages
                 className={styles.errors}

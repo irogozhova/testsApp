@@ -1,6 +1,7 @@
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import AllTestsPage from './pages/AllTestsPage';
+import AddNewTestPage from './pages/AddNewTestPage';
 
 import { pagesLink } from 'constants/common';
 
@@ -24,4 +25,11 @@ export default [
     component: AllTestsPage,
     isPrivate: true,
   },
+  {
+    path: pagesLink.addNewTest,
+    exact: true,
+    cache: false,
+    component: AddNewTestPage,
+    isPrivate: true,
+  }
 ];
