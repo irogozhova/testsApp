@@ -16,6 +16,9 @@ export function* api({
       method,
       data,
       withCredentials: true,
+      headers: {
+        'scope-key': 'f74c6af46a78becb2f1bd3f95bbd5858'
+      }
     }).then((response) => response.data);
 
     yield put({

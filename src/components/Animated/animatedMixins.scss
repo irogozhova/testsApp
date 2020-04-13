@@ -1,0 +1,64 @@
+@mixin fadeIn($direction, $translate) {
+  @keyframes fadeIn#{$direction}#{$translate} {
+    from {
+      opacity: 0;
+
+      @if $direction == Down {
+        transform: translate3d(0, -#{$translate}px, 0);
+      }
+
+      @if $direction == Up {
+        transform: translate3d(0, #{$translate}px, 0);
+      }
+
+      @if $direction == Left {
+        transform: translate3d(-#{$translate}px, 0, 0);
+      }
+
+      @if $direction == Right {
+        transform: translate3d(#{$translate}px, 0, 0);
+      }
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .fadeIn#{$direction}#{$translate} {
+    animation-name: fadeIn#{$direction}#{$translate};
+  }
+}
+
+@mixin fadeOut($direction, $translate) {
+  @keyframes fadeOut#{$direction}#{$translate} {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+
+      @if $direction == Down {
+        transform: translate3d(0, #{$translate}px, 0);
+      }
+
+      @if $direction == Up {
+        transform: translate3d(0, -#{$translate}px, 0);
+      }
+
+      @if $direction == Left {
+        transform: translate3d(-#{$translate}px, 0, 0);
+      }
+
+      @if $direction == Right {
+        transform: translate3d(#{$translate}px, 0, 0);
+      }
+    }
+  }
+
+  .fadeOut#{$direction}#{$translate} {
+    animation-name: fadeOut#{$direction}#{$translate};
+  }
+}

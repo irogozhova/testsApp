@@ -1,0 +1,94 @@
+@keyframes zoomIn9 {
+  from {
+    transform: scale3d(0.9, 0.9, 0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.zoomIn9 {
+  animation-name: zoomIn9;
+}
+
+@keyframes zoomOut9 {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    transform: scale3d(0.9, 0.9, 0.9);
+    opacity: 0;
+  }
+}
+
+.zoomOut9 {
+  animation-name: zoomOut9;
+}
+
+@keyframes zoomInLeft {
+  from {
+    transform: scale3d(0.9, 0.9, 0.9) translate3d(47px, 0, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.zoomInLeft {
+  animation-name: zoomInLeft;
+}
+
+@keyframes zoomOutLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale3d(0.9, 0.9, 0.9) translate3d(47px, 0, 0);
+    opacity: 0;
+  }
+}
+
+.zoomOutLeft {
+  animation-name: zoomOutLeft;
+}
+
+@keyframes zoomIn100 {
+  from {
+    opacity: 0;
+    transform: scale3d(0.5, 0.5, 0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.zoomIn100 {
+  animation-name: zoomIn100;
+}
+
+@keyframes zoomOut100 {
+  from {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(0.5, 0.5, 0.5);
+  }
+}
+
+.zoomOut100 {
+  animation-name: zoomOut100;
+}

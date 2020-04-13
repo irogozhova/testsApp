@@ -21,3 +21,5 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
 export const UPDATE_TEST_NAME = "UPDATE_TEST_NAME";
+export const SAVE_TEST = "SAVE_TEST";
+export const SAVE_TEST_SUCCESS = "SAVE_TEST_SUCCESS";

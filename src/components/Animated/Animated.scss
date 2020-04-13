@@ -1,0 +1,27 @@
+@import './animatedMixins';
+@import './animations/zooming';
+
+// fadeInUp
+@include fadeIn(Up, 10);
+@include fadeIn(Up, 30);
+@include fadeIn(Up, 40);
+@include fadeIn(Up, 80);
+
+// fadeInDown
+@include fadeIn(Down, 30);
+
+// fadeInLeft
+@include fadeIn(Left, 7);
+@include fadeIn(Left, 55);
+
+// fadeOutUp
+@include fadeOut(Up, 30);
+
+// fadeOutDown
+@include fadeOut(Down, 10);
+@include fadeOut(Down, 30);
+@include fadeOut(Down, 80);
+
+// fadeOutLeft
+@include fadeOut(Left, 7);
+@include fadeOut(Left, 55);

@@ -31,4 +31,22 @@
       font-size: 29px;
     }
   }
+
+  .saveBtn {
+    @include button;
+  }
+
+  .removeBtn {
+    @include button($background: $dustyGray, $hover: darken($dustyGray, 40%));
+  }
+
+  .saveRemoveBtnWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+
+    .saveBtn {
+      margin-bottom: 15px;
+    }
+  }
 }
