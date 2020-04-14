@@ -1,0 +1,52 @@
+@import 'styles/mixins.scss';
+
+.root {
+  padding: 30px 20px;
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  .addQuestionBtnWrapper {
+    width: 49px;
+    margin: 35px auto 0;
+  }
+
+  .addQuestionBtn {
+    @include button;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+
+    span {
+      display: none;
+
+      // @include tablet {
+      //   display: none;
+      // }
+    }
+
+    i {
+      font-size: 29px;
+    }
+  }
+
+  .saveBtn {
+    @include button;
+  }
+
+  .removeBtn {
+    @include button($background: $dustyGray, $hover: darken($dustyGray, 40%));
+  }
+
+  .saveRemoveBtnWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+
+    .saveBtn {
+      margin-bottom: 15px;
+    }
+  }
+}

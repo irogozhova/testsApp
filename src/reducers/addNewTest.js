@@ -7,6 +7,7 @@ import {
 const initialState = {
   test: {
     name: '',
+    questions: [],
   },
   isSendingInProgress: false,
 };
@@ -29,8 +30,14 @@ export default function(state = initialState, { type, payload }) {
       }
 
     case SAVE_TEST_SUCCESS:
+      const { data: { id, title } } = payload;
+
       return {
         ...state,
+        test: {
+          id,
+          title,
+        },
         isSendingInProgress: false,
       }
 

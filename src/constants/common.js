@@ -3,4 +3,5 @@ export const pagesLink = {
   registration: '/registration',
   allTests: '/',
   addNewTest: '/addNewTest',
+  editTest: '/editTest',
 };

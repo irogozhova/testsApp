@@ -5,6 +5,7 @@ import logout from './logout';
 import currentUser from './currentUser';
 import registrationForm from  './registrationForm';
 import addNewTest from  './addNewTest';
+import questionForm from  './questionForm';
 
 export default combineReducers({
   login,
@@ -12,4 +13,5 @@ export default combineReducers({
   currentUser,
   registration: registrationForm,
   addNewTest,
+  questionForm,
 })
