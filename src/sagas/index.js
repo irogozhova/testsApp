@@ -4,6 +4,7 @@ import logoutSaga from './logoutSaga';
 import registrationSaga from './registrationSaga';
 import currentUserSaga from './currentUserSaga';
 import addNewTestSaga from './addNewTestSaga';
+import getTestDataSaga from './getTestDataSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     registrationSaga(),
     currentUserSaga(),
     addNewTestSaga(),
+    getTestDataSaga(),
   ])
 }

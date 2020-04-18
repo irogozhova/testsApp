@@ -1,32 +1,37 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 import {
-  // onUpdateTestName,
+  onGetTestData,
+  onUpdateTestName,
   onShowAddQuestionForm,
   // onSubmit,
 } from "actions/editTest";
 
 import { questionFormSelector } from "reducers/questionFormSelectors";
-import { testSelector } from "reducers/addNewTestSelectors";
+import { testSelector } from "reducers/editTestSelectors";
 
 import InputField from 'components/InputField';
 import AddQuestionForm from './AddQuestionForm';
 
 import styles from './EditTestPage.module.scss';
 
-class EditTestPage extends PureComponent {
+class EditTestPage extends Component {
+  componentDidMount() {
+    const { onGetTestData, match: { params: { id }} } = this.props;
+    onGetTestData(id);
+  }
+  
   handleSubmit = () => {
     const { onSubmit, test } = this.props;
     onSubmit(test);
   }
-
+  
   handleAddQuestion = () => {
     const { onShowAddQuestionForm } = this.props;
     onShowAddQuestionForm();
   }
-
-
+  
   render() {
     const {
       test: {
@@ -37,10 +42,10 @@ class EditTestPage extends PureComponent {
         // title,
         questionType,
       },
-      // onUpdateTestName,
+      onUpdateTestName,
       isSendingInProgress,
     } = this.props;
-
+    
     return (
       <div className={styles.root}>
         <h1>Редактировать тест</h1>
@@ -49,7 +54,7 @@ class EditTestPage extends PureComponent {
           name="testName"
           value={title}
           text={title}
-          // onChange={onUpdateTestName}
+          onChange={onUpdateTestName}
         />
         <div className={styles.addQuestionBtnWrapper}>
           <button
@@ -64,7 +69,6 @@ class EditTestPage extends PureComponent {
         </div>
         <AddQuestionForm
           isVisible={isVisible}
-          title={title}
           questionType={questionType}
         />
         <div className={styles.saveRemoveBtnWrapper}>
@@ -98,7 +102,8 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { 
-    // onUpdateTestName,
+    onGetTestData,
+    onUpdateTestName,
     onShowAddQuestionForm,
     // onSubmit,
   }

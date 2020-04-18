@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
 
 import {
-  onUpdateTestName,
+  onChangeTestName,
   onSubmit,
 } from "actions/addNewTest";
 
@@ -25,7 +25,7 @@ class AddNewTestPage extends PureComponent {
       test: {
         title,
       },
-      // onUpdateTestName,
+      onChangeTestName,
       isSendingInProgress,
     } = this.props;
 
@@ -37,7 +37,7 @@ class AddNewTestPage extends PureComponent {
           name="testName"
           value={title}
           text="Название"
-          // onChange={onUpdateTestName}
+          onChange={onChangeTestName}
         />
         <div className={styles.saveRemoveBtnWrapper}>
           <button
@@ -63,7 +63,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { 
-    // onUpdateTestName,
+    onChangeTestName,
     onSubmit,
   }
 )(AddNewTestPage);

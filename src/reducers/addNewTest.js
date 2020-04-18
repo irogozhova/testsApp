@@ -1,5 +1,5 @@
 import { 
-  UPDATE_TEST_NAME,
+  CHANGE_TEST_NAME,
   SAVE_TEST,
   SAVE_TEST_SUCCESS,
 } from "actions/constants";
@@ -14,7 +14,7 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
   switch (type) {
-    case UPDATE_TEST_NAME:
+    case CHANGE_TEST_NAME:
       const { value } = payload;
       return {
         ...state,
