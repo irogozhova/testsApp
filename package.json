@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "history": "^4.10.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "react": "^16.13.0",
     "react-css-animated": "^2.0.0",
